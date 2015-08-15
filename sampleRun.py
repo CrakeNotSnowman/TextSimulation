@@ -8,7 +8,7 @@ import random
 
 
 def main():
-    depth = 2
+    depth = 5
     saveFilename1 = "IRobotModel"
     saveFilename2 = "SciFiModel"
 
@@ -44,7 +44,7 @@ def main():
 
     # Print 10 sentences with random starting words
     for i in range(10):
-	fakeText = modelText.simulateText(newmodels, random.sample(models[0],1)[0] , 12)
+	fakeText = modelText.simulateText(newmodels, random.sample(models[0],1)[0])
 	print fakeText
 
     return

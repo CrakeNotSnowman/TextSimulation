@@ -73,6 +73,7 @@ def simulateText(model, keyword, limSize=100):
 
     def mergeModels(models):
 	# really basic model merge, just to get a result
+	masterD = {}
 	masterD = models[0] # no manipulation to most recent model
 	# for cleaner see http://stackoverflow.com/questions/11011756/
 	for i in range(1, len(models)):
@@ -80,6 +81,12 @@ def simulateText(model, keyword, limSize=100):
 	    for d2key in d2.keys():
 		if d2key in masterD:
 		    masterD[d2key] = masterD[d2key] + d2[d2key]
+		    # **Code below may cause unnerving Overflow Errors. **
+		    #   It has the weird effect of a record skipping, and depending on which
+		    #   word it skips on, the text stream may be creepy. 
+		    #   Enjoy.
+		    #masterD[d2key] = min((masterD[d2key] + d2[d2key]* min(len(d2key), 9)), 1000000)
+		    #masterD[d2key] = masterD[d2key] + d2[d2key]* min(len(d2key), 9)
 		else:
 		    masterD[d2key] = d2[d2key]
 	return masterD
